@@ -1,7 +1,6 @@
 # snowflake
 
-high performance Snowflake ID generator, 
-built with atomics for speed and efficiency.
+high performance Snowflake library
 
 built in `sql/driver` and json support
 
