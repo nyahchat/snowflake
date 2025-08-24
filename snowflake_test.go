@@ -7,7 +7,7 @@ import (
 )
 
 func TestSnowflakeGenerateBasic(t *testing.T) {
-	gen, _ := NewSnowflakeGenerator(1, DiscordEpoch)
+	gen, _ := NewGenerator(1, DiscordEpoch)
 	id := gen.MustGenerate()
 
 	if int64(id) == 0 {
@@ -32,7 +32,7 @@ func TestSnowflakeGenerateBasic(t *testing.T) {
 }
 
 func TestSnowflakeJSONMarshaling(t *testing.T) {
-	gen, _ := NewSnowflakeGenerator(2, DiscordEpoch)
+	gen, _ := NewGenerator(2, DiscordEpoch)
 	id := gen.MustGenerate()
 
 	data, err := json.Marshal(id)
@@ -51,7 +51,7 @@ func TestSnowflakeJSONMarshaling(t *testing.T) {
 }
 
 func TestSnowflakeDatabaseValueScan(t *testing.T) {
-	gen, _ := NewSnowflakeGenerator(3, DiscordEpoch)
+	gen, _ := NewGenerator(3, DiscordEpoch)
 	id := gen.MustGenerate()
 
 	val, err := id.Value()

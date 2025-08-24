@@ -7,7 +7,7 @@ import (
 )
 
 func TestNewSnowflakeGenerator_ValidNodeId(t *testing.T) {
-	gen, err := NewSnowflakeGenerator(1, TwitterEpoch)
+	gen, err := NewGenerator(1, TwitterEpoch)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -17,14 +17,14 @@ func TestNewSnowflakeGenerator_ValidNodeId(t *testing.T) {
 }
 
 func TestNewSnowflakeGenerator_InvalidNodeId(t *testing.T) {
-	_, err := NewSnowflakeGenerator((1<<snowflakeNodeIdBits)-1, TwitterEpoch)
+	_, err := NewGenerator((1<<snowflakeNodeIdBits)-1, TwitterEpoch)
 	if err != ErrInvalidNodeId {
 		t.Fatalf("expected ErrInvalidNodeId, got %v", err)
 	}
 }
 
 func TestSnowflakeGenerateConcurrent(t *testing.T) {
-	gen, _ := NewSnowflakeGenerator(4, DiscordEpoch)
+	gen, _ := NewGenerator(4, DiscordEpoch)
 	const count = 10000
 
 	var wg sync.WaitGroup
@@ -46,7 +46,7 @@ func TestSnowflakeGenerateConcurrent(t *testing.T) {
 }
 
 func BenchmarkSnowflakeGenerate(b *testing.B) {
-	gen, _ := NewSnowflakeGenerator(1, DiscordEpoch)
+	gen, _ := NewGenerator(1, DiscordEpoch)
 	b.ReportAllocs()
 	b.ResetTimer()
 

@@ -40,7 +40,7 @@ var (
 	ErrGenerationClockRollback error = errors.New("clock went backwards")
 )
 
-func NewSnowflakeGenerator(nodeId, timestampEpoch int64) (*SnowflakeGenerator, error) {
+func NewGenerator(nodeId, timestampEpoch int64) (*SnowflakeGenerator, error) {
 	if nodeId >= (1<<snowflakeNodeIdBits)-1 {
 		return nil, ErrInvalidNodeId
 	}
